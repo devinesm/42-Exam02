@@ -1,0 +1,12 @@
+/*
+• File: ft_swap.c | Allowed: none
+
+Subject
+
+Write a function that swaps the contents of two integers the adresses of which
+are passed as parameters.
+
+Your function must be declared as follows:
+void ft_swap(int *a, int *b);
+
+*/
