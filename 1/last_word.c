@@ -21,3 +21,37 @@ $> ./last_word " lorem,ipsum " | cat -e
 lorem,ipsum$
 
 */
+
+#include <unistd.h>
+
+int ft_strlen(char *av)
+{
+	int i = 0;
+	while (av[i])
+		i++;
+	return (i);
+}
+
+int main(int ac, char **av)
+{
+	if (ac == 2)
+	{
+		int len = ft_strlen(av[1]) - 1;
+
+		while ((len >= 0) && (av[1][len] == ' ' || av[1][len] == '\t'))
+			len--;
+
+		while ((len >= 0) && (av[1][len] != ' ' && av[1][len] != '\t'))
+			len--;
+
+		len += 1;
+
+		while (av[1][len] != ' ' && av[1][len] != '\t' && av[1][len])
+		{
+			write(1, &av[1][len], 1);
+			len++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
