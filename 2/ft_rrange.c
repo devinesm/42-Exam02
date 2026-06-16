@@ -16,3 +16,29 @@ Examples:
 - With (0, -3) you will return an array containing -3, -2, -1 and 0.
 
 */
+
+#include <stdlib.h>
+int *ft_rrange(int start, int end)
+{
+	int size;
+	if (start < end)
+		size = end - start + 1;
+	else
+		size = start - end + 1;
+
+	int *rrange = malloc(size * sizeof(int));
+	if (!rrange)
+		return (rrange);
+
+	int i = 0;
+	while (i < size)
+	{
+		rrange[i] = end;
+		if (start < end)
+			end--;
+		else
+			end++;
+		i++;
+	}
+	return (rrange);
+}

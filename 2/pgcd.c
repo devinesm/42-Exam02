@@ -5,6 +5,7 @@ Subject
 
 Write a program that takes two strings representing two strictly positive
 integers that fit in an int.
+
 Display their highest common denominator followed by a newline.
 If the number of parameters is not 2, display a newline.
 
@@ -21,3 +22,26 @@ $> ./pgcd | cat -e
 $
 
 */
+
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int ac, char **av)
+{
+	if (ac == 3)
+	{
+		int a = atoi(av[1]);
+		int b = atoi(av[2]);
+
+		while (b > 0)
+		{
+			int temp = b;
+			b = a % b;
+			a = temp;
+		}
+
+		printf("%d", a);
+	}
+	printf("\n");
+	return (0);
+}

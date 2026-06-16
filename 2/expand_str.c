@@ -6,8 +6,10 @@ Subject
 Write a program that takes a string and displays it with exactly three spaces
 between each word, with no spaces or tabs either at the beginning or the end,
 followed by a newline.
+
 A word is a section of string delimited either by spaces/tabs, or by the
 start/end of the string.
+
 If the number of parameters is not 1, or if there are no words, simply display
 a newline.
 
@@ -22,3 +24,35 @@ $> ./expand_str "" | cat -e
 $
 
 */
+
+#include <unistd.h>
+int main(int ac, char **av)
+{
+	if (ac == 2)
+	{
+		int i = 0;
+
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+
+		while (av[1][i])
+		{
+			while (av[1][i] && (av[1][i] != ' ' && av[1][i] != '\t'))
+			{
+				write(1, &av[1][i], 1);
+				i++;
+			}
+
+			if (!av[1][i])
+				break;
+
+			while (av[1][i] == ' ' || av[1][i] == '\t')
+				i++;
+
+			if (av[1][i])
+				write(1, "   ", 3);
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}

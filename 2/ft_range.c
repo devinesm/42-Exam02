@@ -5,6 +5,7 @@ Subject
 
 Write the following function:
 int *ft_range(int start, int end);
+
 It must allocate (with malloc()) an array of integers, fill it with consecutive
 values that begin at start and end at end (Including start and end !), then
 return a pointer to the first value of the array.
@@ -16,3 +17,30 @@ Examples:
 - With (0, -3) you will return an array containing 0, -1, -2 and -3.
 
 */
+
+#include <stdlib.h>
+int *ft_range(int start, int end)
+{
+	int size = 0;
+	if (start < end)
+		size = end - start + 1;
+	else
+		size = start - end + 1;
+
+	int *range = malloc(size * sizeof(int));
+	if (!range)
+		return (range);
+
+	int i = 0;
+	while (i < size)
+	{
+		range[i] = start;
+		if (start < end)
+			start++;
+		else
+			start--;
+		i++;
+	}
+
+	return (range);
+}
