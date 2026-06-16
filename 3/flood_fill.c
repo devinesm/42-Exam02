@@ -3,8 +3,10 @@
 
 Subject
 
-Write a function that takes a char** as a 2-dimensional array of char, a
-t_point as the dimensions of this array and a t_point as the starting point.
+Write a function that takes a char** as a 2-dimensional array of char,
+a t_point as the dimensions of this array and
+a t_point as the starting point.
+
 Starting from the given 'begin' t_point, this function fills an entire zone
 by replacing characters inside with the character 'F'. A zone is a group of
 the same character delimited horizontally and vertically by other characters
@@ -38,3 +40,29 @@ F00F000F
 F0FF000F
 FFF0000F
 */
+
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
+void fill(char **tab, t_point size, t_point cur, char target)
+{
+	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x)
+		return;
+	
+	if (tab[cur.y][cur.x] != target)
+        return;
+
+	tab[cur.y][cur.x] = 'F';
+	fill(tab, size, (t_point){cur.x - 1, cur.y}, target);
+	fill(tab, size, (t_point){cur.x + 1, cur.y}, target);
+	fill(tab, size, (t_point){cur.x, cur.y - 1}, target);
+	fill(tab, size, (t_point){cur.x, cur.y + 1}, target);
+}
+
+void flood_fill(char **tab, t_point size, t_point begin)
+{
+	fill(tab, size, begin, tab[begin.y][begin.x]);
+}
